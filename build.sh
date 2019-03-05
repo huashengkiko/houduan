@@ -13,5 +13,4 @@ docker run --rm \
    -v $proj_home:/usr/src/mymaven \
    -w /usr/src/mymaven $img_mvn mvn clean package -U
 
-mv $proj_home/deepxi-user-center-provider/target/deepxi-user-center-provider-*.jar $proj_home/deepxi-user-center-provider/target/demo.jar
-cp $m2_cache/repository/com/taobao/pandora/taobao-hsf.sar/dev-SNAPSHOT/taobao-hsf.sar-dev-SNAPSHOT.jar $proj_home/deepxi-user-center-provider/target/taobao-hsf.sar-dev-SNAPSHOT.jar
+mv $proj_home/deepexi-center-provider/target/deepexi-center-provider-*.jar $proj_home/deepexi-center-provider/target/demo.jar

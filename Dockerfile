@@ -3,5 +3,4 @@ FROM fabric8/java-jboss-openjdk8-jdk
 
 USER root
 
-# Prepare by downloading dependencies
-COPY deepxi-user-center-provider/target/demo.jar deepxi-user-center-provider/target/taobao-hsf.sar-dev-SNAPSHOT.jar /home/
+COPY deepexi-center-provider/target/demo.jar /home/
