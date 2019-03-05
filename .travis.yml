@@ -1,0 +1,19 @@
+sudo: false
+language: node_js
+node_js:
+  - '6'
+  - '8'
+env:
+  - --production
+install:
+  - npm i npminstall && npminstall
+script:
+  - npm run start
+after_script:
+  - npminstall codecov && codecov
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
