@@ -5,18 +5,18 @@
 
     <parent>
         <groupId>com.deepexi</groupId>
-        <artifactId>springcloud-center-modules</artifactId>
+        <artifactId>dubbo-center-modules</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.deepexi</groupId>
-    <artifactId>deepexi-center</artifactId>
+    <groupId>com.dedepxi</groupId>
+    <artifactId>deepexi-user</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>deepexi-center-api</module>
-        <module>deepexi-center-provider</module>
+        <module>deepexi-user-api</module>
+        <module>deepexi-user-provider</module>
     </modules>
 
     <repositories>
@@ -26,4 +26,12 @@
             <url>http://nexus.deepexi.top/repository/maven-public/</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>deepexi-plugin-central</id>
+            <url>http://nexus.deepexi.top/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
 </project>
