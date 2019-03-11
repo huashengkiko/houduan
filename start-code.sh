@@ -4,50 +4,38 @@ cd `dirname $0`
 img_mvn="maven:3.3.3-jdk-8"                 # docker image of maven
 m2_cache=~/.m2                              # the local maven cache dir
 proj_home=$PWD                              # the project root dir
-img_output="deepexi/xpass-member-center"         # output image tag
+img_output="deepexi/deepexi-user-center"         # output image tag
 
 git pull  # should use git clone https://name:pwd@xxx.git
 
-if which mvn ; then
-    echo "use local maven"
-    mvn clean package -U
-else
-    echo "use docker maven"
-    docker run --rm \
-        -v $m2_cache:/root/.m2 \
-        -v $proj_home:/usr/src/mymaven \
-        -w /usr/src/mymaven $img_mvn mvn clean package -U
-fi
+echo "use docker maven"
+docker run --rm \
+   -v $m2_cache:/root/.m2 \
+   -v $proj_home:/usr/src/mymaven \
+   -w /usr/src/mymaven $img_mvn mvn clean package -U
 
-sudo mv $proj_home/xpass-member-center-provider/target/xpass-member-center-provider-*.jar $proj_home/xpass-member-center-provider/target/demo.jar # 兼容所有sh脚本
-sudo cp $m2_cache/repository/com/taobao/pandora/taobao-hsf.sar/dev-SNAPSHOT/taobao-hsf.sar-dev-SNAPSHOT.jar $proj_home/xpass-member-center-provider/target/taobao-hsf.sar-dev-SNAPSHOT.jar
+sudo mv $proj_home/deepexi-user-center-provider/target/deepexi-user-center-provider-*.jar $proj_home/deepexi-user-center-provider/target/demo.jar # 兼容所有sh脚本
 docker build -t $img_output .
 
 mkdir -p $PWD/logs
 chmod 777 $PWD/logs
 
 # 删除容器
-docker rm -f xpass-member-center &> /dev/null
+docker rm -f deepexi-user-center &> /dev/null
 
 version=`date "+%Y%m%d%H"`
 
-spring_datasource_url=jdbc:mysql://localhost:3306/xpass-member-center?useUnicode=true\&characterEncoding=utf-8\&useSSL=false
-
-server_ip=192.168.31.100
+spring_datasource_url=jdbc:mysql://localhost:3306/deepexi-user-center?useUnicode=true\&characterEncoding=utf-8\&useSSL=false
 
 # 启动镜像
 docker run -d --restart=on-failure:5 --privileged=true \
-    --add-host=jmenv.tbsite.net:$server_ip \
     --net=host \
     -w /home \
     -v $PWD/logs:/home/logs \
-    --name xpass-member-center deepexi/xpass-member-center \
+    --name deepexi-user-center deepexi/deepexi-user-center \
     java \
         -Djava.security.egd=file:/dev/./urandom \
         -Duser.timezone=Asia/Shanghai \
-        -Dpandora.location=/home/taobao-hsf.sar-dev-SNAPSHOT.jar \
-        -Dhsf.server.port=12088 \
-        -Dpandora.qos.port=12089 \
         -XX:+PrintGCDateStamps \
         -XX:+PrintGCTimeStamps \
         -XX:+PrintGCDetails \
@@ -57,4 +45,5 @@ docker run -d --restart=on-failure:5 --privileged=true \
           --spring.profiles.active=prod \
           --spring.datasource.url=$spring_datasource_url \
           --spring.datasource.username=root \
-          --spring.datasource.password=my-secret-ab
+          --spring.datasource.password=my-secret-ab \
+          --dubbo.registry.address=zookeeper://127.0.0.1:2181
