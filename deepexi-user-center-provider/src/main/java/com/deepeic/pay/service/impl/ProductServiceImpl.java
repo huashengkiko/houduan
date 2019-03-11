@@ -71,16 +71,4 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 测试框架统一捕获处理内部处理异常
-     */
-    public void testError() {
-        throw new ApplicationException(ResultEnum.USER_EXIST);
-    }
-
-    /**
-     * 测试rpc调用时服务端抛出自定义异常，调用端是否能正常处理
-     */
-    public void testRpcError() {
-        throw new ApplicationException(ResultEnum.RPC_ERROR);
-    }
-}
+     * 
