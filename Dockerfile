@@ -1,7 +1,9 @@
-# 建议生产使用，ref: http://blog.tenxcloud.com/?p=1894
-FROM fabric8/java-jboss-openjdk8-jdk
+FROM node:8.7.0
 
-USER root
+COPY . /root
 
-# Prepare by downloading dependencies
-COPY deepexi-user-center-provider/target/demo.jar /home/
+# WORKDIR /root
+
+# npm install --registry=https://registry.npm.taobao.org --production && egg-scripts start --port=7001 --daemon --env=prod --title=fcbb-dc --workers=4
+
+CMD npm start
