@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--客户映射 指定到dao接口 -->
+<mapper namespace="com.deepeic.pay.mapper.ArticleContentMapper">
+    <resultMap type="com.deepeic.pay.domain.dto.ArticleContentDto" id="ArticleContentDtoResult">
+        <result property="id" column="id" />
+        <result property="tenantId" column="tenant_id" />
+        <result property="articleId" column="article_id" />
+        <result property="wechatPublistNo" column="wechat_publist_no" />
+        <result property="content" column="content" />
+    </resultMap>
+    <sql id="Base_Column_List">
+      id,      tenant_id,      article_id,      wechat_publist_no,      content    </sql>
+    <select id="findList" resultType="com.deepeic.pay.domain.eo.ArticleContent">
+        SELECT * FROM article_content WHERE 1=1
+    </select>
+
+    <update id="deleteByIds">
+        UPDATE article_content set dr=1 where id in
+        <foreach collection="pks" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

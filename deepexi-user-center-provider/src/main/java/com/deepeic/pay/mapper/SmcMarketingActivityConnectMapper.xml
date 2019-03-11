@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--客户映射 指定到dao接口 -->
+<mapper namespace="com.deepeic.pay.mapper.SmcMarketingActivityConnectMapper">
+    <resultMap type="com.deepeic.pay.domain.dto.SmcMarketingActivityConnectDto" id="SmcMarketingActivityConnectDtoResult">
+        <result property="id" column="id" />
+        <result property="mtiId" column="mti_id" />
+        <result property="maiId" column="mai_id" />
+    </resultMap>
+    <sql id="Base_Column_List">
+      id,      mti_id,      mai_id    </sql>
+    <select id="findList" resultType="com.deepeic.pay.domain.eo.SmcMarketingActivityConnect">
+        SELECT * FROM smc_marketing_activity_connect WHERE 1=1
+    </select>
+
+    <update id="deleteByIds">
+        UPDATE smc_marketing_activity_connect set dr=1 where id in
+        <foreach collection="pks" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

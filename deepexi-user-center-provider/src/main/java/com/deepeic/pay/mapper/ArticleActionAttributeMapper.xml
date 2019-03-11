@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--客户映射 指定到dao接口 -->
+<mapper namespace="com.deepeic.pay.mapper.ArticleActionAttributeMapper">
+    <resultMap type="com.deepeic.pay.domain.dto.ArticleActionAttributeDto" id="ArticleActionAttributeDtoResult">
+        <result property="id" column="id" />
+        <result property="wechatPublistNo" column="wechat_publist_no" />
+        <result property="articleId" column="article_id" />
+        <result property="tenantId" column="tenant_id" />
+        <result property="createdAt" column="created_at" />
+        <result property="createdBy" column="created_by" />
+        <result property="updatedBy" column="updated_by" />
+        <result property="updatedAt" column="updated_at" />
+        <result property="dr" column="dr" />
+        <result property="type" column="type" />
+        <result property="number" column="number" />
+        <result property="ext1" column="ext1" />
+        <result property="ext2" column="ext2" />
+        <result property="ext3" column="ext3" />
+        <result property="ext4" column="ext4" />
+        <result property="extJson" column="ext_json" />
+    </resultMap>
+    <sql id="Base_Column_List">
+      id,      wechat_publist_no,      article_id,      tenant_id,      created_at,      created_by,      updated_by,      updated_at,      dr,      type,      number,      ext1,      ext2,      ext3,      ext4,      ext_json    </sql>
+    <select id="findList" resultType="com.deepeic.pay.domain.eo.ArticleActionAttribute">
+        SELECT * FROM article_action_attribute WHERE 1=1
+    </select>
+
+    <update id="deleteByIds">
+        UPDATE article_action_attribute set dr=1 where id in
+        <foreach collection="pks" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

@@ -9,14 +9,14 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.dedepxi</groupId>
-    <artifactId>deepexi-user</artifactId>
+    <groupId>com.deepeic</groupId>
+    <artifactId>deepexi-user-center</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>deepexi-user-api</module>
-        <module>deepexi-user-provider</module>
+        <module>deepexi-user-center-api</module>
+        <module>deepexi-user-center-provider</module>
     </modules>
 
     <repositories>
