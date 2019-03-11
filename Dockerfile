@@ -1,9 +1,7 @@
-FROM node:8.7.0
+# 建议生产使用，ref: http://blog.tenxcloud.com/?p=1894
+FROM fabric8/java-jboss-openjdk8-jdk
 
-COPY . /root
+USER root
 
-# WORKDIR /root
-
-# npm install --registry=https://registry.npm.taobao.org --production && egg-scripts start --port=7001 --daemon --env=prod --title=fcbb-dc --workers=4
-
-CMD npm start
+# Prepare by downloading dependencies
+COPY xpass-member-center-provider/target/demo.jar xpass-member-center-provider/target/taobao-hsf.sar-dev-SNAPSHOT.jar /home/
