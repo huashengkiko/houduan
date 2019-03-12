@@ -30,4 +30,45 @@ public class SmcMarketingActivityConnectServiceImpl implements SmcMarketingActiv
     public PageBean findPage(SmcMarketingActivityConnect eo, Integer page, Integer size) {
         PageHelper.startPage(page, size);
         List<SmcMarketingActivityConnect> list = smcMarketingActivityConnectMapper.findList(eo);
-        return new 
+        return new PageBean<>(list);
+    }
+
+    @Override
+    public List<SmcMarketingActivityConnect> findAll(SmcMarketingActivityConnect eo) {
+        List<SmcMarketingActivityConnect> list = smcMarketingActivityConnectMapper.findList(eo);
+        return list;
+    }
+    @Override
+    public SmcMarketingActivityConnect detail(String pk) {
+        return smcMarketingActivityConnectMapper.selectById(pk);
+    }
+
+    @Override
+    public Boolean create(SmcMarketingActivityConnect eo) {
+        int result = smcMarketingActivityConnectMapper.insert(eo);
+        if (result > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean update(String pk,SmcMarketingActivityConnect eo) {
+        eo.setId(pk);
+        int result = smcMarketingActivityConnectMapper.updateById(eo);
+        if (result > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean delete(String...pk) {
+        int result = smcMarketingActivityConnectMapper.deleteByIds(pk);
+        if (result > 0) {
+            return true;
+        }
+        return false;
+    }
+
+}
